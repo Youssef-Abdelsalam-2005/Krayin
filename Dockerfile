@@ -39,8 +39,8 @@ COPY php-overrides.ini "$PHP_INI_DIR/conf.d/99-overrides.ini"
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Apache config: listen on Railway's dynamic PORT, enable mod_rewrite
-RUN a2enmod rewrite headers
+# Apache config: ensure only one MPM is loaded, enable mod_rewrite
+RUN a2dismod mpm_event mpm_worker 2>/dev/null; a2enmod mpm_prefork rewrite headers
 COPY apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's/Listen 80/Listen ${PORT}/' /etc/apache2/ports.conf
 
