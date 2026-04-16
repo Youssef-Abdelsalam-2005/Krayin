@@ -73,6 +73,15 @@ MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS:-crm@example.com}
 MAIL_FROM_NAME="${MAIL_FROM_NAME:-Krayin CRM}"
 EOF
 
+# Force HTTPS in Laravel when behind Railway reverse proxy
+if [[ "${APP_URL:-}" == https://* ]]; then
+    echo "=== Forcing HTTPS for all generated URLs ==="
+    # Add SetEnv HTTPS on to .htaccess so $_SERVER['HTTPS'] = 'on'
+    if [ -f public/.htaccess ] && ! grep -q "SetEnv HTTPS on" public/.htaccess; then
+        sed -i '/<IfModule mod_rewrite.c>/a\    SetEnv HTTPS on' public/.htaccess
+    fi
+fi
+
 # Generate app key if not set
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "" ]; then
     php artisan key:generate --force
