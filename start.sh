@@ -95,5 +95,14 @@ php artisan storage:link --force 2>/dev/null || true
 
 echo "=== Krayin CRM starting on port ${PORT:-80} ==="
 
+# Fix MPM conflict at runtime - ensure only prefork is loaded
+rm -f /etc/apache2/mods-enabled/mpm_event.load /etc/apache2/mods-enabled/mpm_event.conf
+rm -f /etc/apache2/mods-enabled/mpm_worker.load /etc/apache2/mods-enabled/mpm_worker.conf
+ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load
+ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf 2>/dev/null || true
+
+# Verify Apache config before starting
+apache2ctl configtest 2>&1 || echo "WARNING: Apache config test failed"
+
 # Start Apache in foreground
 apache2-foreground
