@@ -1,20 +1,15 @@
-# Excludes for railway up.  Railway honours this in addition to .gitignore.
-# .gitignore already excludes node_modules, .yarn caches, dist, etc.
-# Drop the .git history (385 MB) and packages whose source isn't needed
-# by the Twenty server/worker Dockerfile build (only docs/marketing/etc).
-# Do NOT exclude any package referenced from package.json's workspaces[]
-# without also pruning yarn.lock — otherwise yarn install in the container
-# loses transitive type/dev deps.
+# Excludes for `railway up`. Railway honours this in addition to .gitignore.
+# .gitignore already excludes node_modules, .yarn caches, dist, build, etc.
+#
+# IMPORTANT: every entry under packages/ in package.json `workspaces` must be
+# uploaded — yarn install requires each workspace's package.json. Excluding
+# any of them breaks resolution of transitive type/dev deps (e.g.
+# @types/lodash.camelcase on twenty-shared) and the Dockerfile build fails.
+#
+# We only drop the .git history (~385 MB) and obviously-unused dirs.
 
 .git
 .github
-packages/twenty-website
-packages/twenty-website-new
-packages/twenty-docs
-packages/twenty-companion
-packages/twenty-chrome-extension
-packages/twenty-e2e-testing
-packages/twenty-zapier
 .idea
 .vscode
 *.log

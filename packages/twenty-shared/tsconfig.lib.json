@@ -5,7 +5,7 @@
     "declarationMap": true,
     "noEmit": false,
     "outDir": "../../.cache/tsc",
-    "types": ["node"]
+    "types": ["node", "lodash.camelcase", "lodash.escaperegexp"]
   },
   "include": ["src/**/*.js", "src/**/*.ts"],
   "exclude": [
