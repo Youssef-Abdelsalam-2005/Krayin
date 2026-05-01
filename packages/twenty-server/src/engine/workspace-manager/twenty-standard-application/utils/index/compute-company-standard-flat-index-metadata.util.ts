@@ -36,6 +36,11 @@ export const buildCompanyStandardFlatIndexMetadatas = ({
       indexName: 'domainNameUniqueIndex',
       relatedFieldNames: ['domainName'],
       isUnique: true,
+      // Partial unique index: only enforce uniqueness on non-soft-deleted rows.
+      // Without this, deleting a company (which sets deletedAt) leaves the row
+      // in place and the DB unique constraint blocks re-creating one with the
+      // same domain — even though the UI hides the soft-deleted record.
+      indexWhereClause: '"deletedAt" IS NULL',
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,

@@ -36,6 +36,11 @@ export const buildPersonStandardFlatIndexMetadatas = ({
       indexName: 'emailsUniqueIndex',
       relatedFieldNames: ['emails'],
       isUnique: true,
+      // Partial unique index: only enforce uniqueness on non-soft-deleted rows.
+      // Without this, deleting a person (which sets deletedAt) leaves the row
+      // in place and the DB unique constraint blocks re-creating someone with
+      // the same email — even though the UI hides the soft-deleted record.
+      indexWhereClause: '"deletedAt" IS NULL',
     },
     standardObjectMetadataRelatedEntityIds,
     dependencyFlatEntityMaps,
