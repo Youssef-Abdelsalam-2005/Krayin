@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Query } from '@nestjs/graphql';
 
-import { MetadataResolver } from 'src/engine/api/graphql/graphql-config/decorators/metadata-resolver.decorator';
+import { CoreResolver } from 'src/engine/api/graphql/graphql-config/decorators/core-resolver.decorator';
 import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.entity';
 import { NotificationEntity } from 'src/engine/core-modules/notification/notification.entity';
 import {
@@ -15,7 +15,7 @@ import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorat
 import { AuthWorkspaceMemberId } from 'src/engine/decorators/auth/auth-workspace-member-id.decorator';
 import { WorkspaceAuthGuard } from 'src/engine/guards/workspace-auth.guard';
 
-@MetadataResolver(() => NotificationEntity)
+@CoreResolver(() => NotificationEntity)
 @UseGuards(WorkspaceAuthGuard)
 export class NotificationResolver {
   constructor(private readonly notificationService: NotificationService) {}
