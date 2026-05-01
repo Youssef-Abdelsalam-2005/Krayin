@@ -28,6 +28,7 @@ import { AiAgentMonitorModule } from 'src/engine/metadata-modules/ai/ai-agent-mo
 import { AiChatModule } from 'src/engine/metadata-modules/ai/ai-chat/ai-chat.module';
 import { LogicFunctionModule } from 'src/engine/metadata-modules/logic-function/logic-function.module';
 import { NavigationMenuItemModule } from 'src/engine/metadata-modules/navigation-menu-item/navigation-menu-item.module';
+import { NotificationJobModule } from 'src/engine/core-modules/notification/jobs/notification-job.module';
 import { ObjectMetadataModule } from 'src/engine/metadata-modules/object-metadata/object-metadata.module';
 import { WebhookJobModule } from 'src/engine/metadata-modules/webhook/jobs/webhook-job.module';
 import { SubscriptionsModule } from 'src/engine/subscriptions/subscriptions.module';
@@ -65,6 +66,7 @@ import { WorkflowModule } from 'src/modules/workflow/workflow.module';
     CalendarEventParticipantManagerModule,
     TimelineActivityModule,
     StripeModule,
+    NotificationJobModule,
     AutoCompaniesAndContactsCreationJobModule,
     TimelineJobModule,
     WebhookJobModule,

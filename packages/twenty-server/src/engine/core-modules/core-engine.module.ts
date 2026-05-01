@@ -49,6 +49,7 @@ import { messageQueueModuleFactory } from 'src/engine/core-modules/message-queue
 import { TimelineMessagingModule } from 'src/engine/core-modules/messaging/timeline-messaging.module';
 import { MetricsModule } from 'src/engine/core-modules/metrics/metrics.module';
 import { MetricsService } from 'src/engine/core-modules/metrics/metrics.service';
+import { NotificationModule } from 'src/engine/core-modules/notification/notification.module';
 import { OpenApiModule } from 'src/engine/core-modules/open-api/open-api.module';
 import { PostgresCredentialsModule } from 'src/engine/core-modules/postgres-credentials/postgres-credentials.module';
 import { PublicDomainModule } from 'src/engine/core-modules/public-domain/public-domain.module';
@@ -159,6 +160,7 @@ import { FileModule } from './file/file.module';
     CodeInterpreterModule.forRoot(),
     SearchModule,
     ApiKeyModule,
+    NotificationModule,
     PageLayoutModule,
     ImpersonationModule,
     TrashCleanupModule,

@@ -37,6 +37,7 @@ import { WorkspaceModule } from 'src/engine/core-modules/workspace/workspace.mod
 import { FieldMetadataModule } from 'src/engine/metadata-modules/field-metadata/field-metadata.module';
 import { ObjectMetadataModule } from 'src/engine/metadata-modules/object-metadata/object-metadata.module';
 import { TrashCleanupModule } from 'src/engine/trash-cleanup/trash-cleanup.module';
+import { NotificationModule } from 'src/engine/core-modules/notification/notification.module';
 import { WorkspaceCacheStorageModule } from 'src/engine/workspace-cache-storage/workspace-cache-storage.module';
 import { DevSeederModule } from 'src/engine/workspace-manager/dev-seeder/dev-seeder.module';
 import { WorkspaceCleanerModule } from 'src/engine/workspace-manager/workspace-cleaner/workspace-cleaner.module';
@@ -72,6 +73,7 @@ import { AutomatedTriggerModule } from 'src/modules/workflow/workflow-trigger/au
     WorkspaceCleanerModule,
     WorkspaceMigrationModule,
     TrashCleanupModule,
+    NotificationModule,
     PublicDomainModule,
     EventLogCleanupModule,
     EnterpriseModule,

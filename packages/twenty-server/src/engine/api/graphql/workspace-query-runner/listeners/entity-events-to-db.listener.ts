@@ -16,6 +16,7 @@ import { CreateAuditLogFromInternalEvent } from 'src/engine/core-modules/audit/j
 import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
 import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';
 import { MessageQueueService } from 'src/engine/core-modules/message-queue/services/message-queue.service';
+import { CreateNotificationsFromRecordEventJob } from 'src/engine/core-modules/notification/jobs/create-notifications-from-record-event.job';
 import { CallWebhookJobsJob } from 'src/engine/metadata-modules/webhook/jobs/call-webhook-jobs.job';
 import { WorkspaceEventBatchForWebhook } from 'src/engine/metadata-modules/webhook/types/workspace-event-batch-for-webhook.type';
 import { CallDatabaseEventTriggerJobsJob } from 'src/engine/core-modules/logic-function/logic-function-trigger/triggers/database-event/call-database-event-trigger-jobs.job';
@@ -111,6 +112,19 @@ export class EntityEventsToDbListener {
             WorkspaceEventBatch<ObjectRecordNonDestructiveEvent>
           >(
             UpsertTimelineActivityFromInternalEvent.name,
+            batchEvent as WorkspaceEventBatch<ObjectRecordNonDestructiveEvent>,
+          ),
+        );
+
+        // In-app notifications — same trigger conditions as the timeline
+        // activity feed (audit-logged objects, non-DESTROY actions).  The
+        // job itself filters by object name + field allow-list, so this fans
+        // out only for the handful of objects we care about.
+        promises.push(
+          this.entityEventsToDbQueueService.add<
+            WorkspaceEventBatch<ObjectRecordNonDestructiveEvent>
+          >(
+            CreateNotificationsFromRecordEventJob.name,
             batchEvent as WorkspaceEventBatch<ObjectRecordNonDestructiveEvent>,
           ),
         );
