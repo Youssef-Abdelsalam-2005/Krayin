@@ -1,0 +1,22 @@
+# Excludes for railway up.  Railway honours this in addition to .gitignore.
+# .gitignore already excludes node_modules, .yarn caches, dist, etc.
+# We additionally drop the git history (385 MB) and the website/docs
+# packages — none are needed by the Twenty server/worker Dockerfile build.
+
+.git
+.github
+packages/twenty-website
+packages/twenty-website-new
+packages/twenty-docs
+packages/twenty-companion
+packages/twenty-chrome-extension
+packages/twenty-e2e-testing
+packages/twenty-zapier
+packages/create-twenty-app
+packages/twenty-apps
+packages/twenty-cli
+packages/twenty-oxlint-rules
+packages/twenty-utils
+.idea
+.vscode
+*.log
