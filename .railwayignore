@@ -1,15 +1,23 @@
 # Excludes for `railway up`. Railway honours this in addition to .gitignore.
 # .gitignore already excludes node_modules, .yarn caches, dist, build, etc.
 #
-# IMPORTANT: every entry under packages/ in package.json `workspaces` must be
+# IMPORTANT: every entry under packages/ in package.json `workspaces` MUST be
 # uploaded — yarn install requires each workspace's package.json. Excluding
-# any of them breaks resolution of transitive type/dev deps (e.g.
-# @types/lodash.camelcase on twenty-shared) and the Dockerfile build fails.
+# any whole package breaks transitive type/dev dep resolution and the docker
+# build fails (e.g. @types/lodash.camelcase missing for twenty-shared).
 #
-# We only drop the .git history (~385 MB) and obviously-unused dirs.
+# We drop the .git history (~385 MB) and large static asset directories that
+# the server/worker docker build doesn't need (docs images, marketing site
+# public assets). Each workspace's package.json + src + scripts stays.
 
 .git
 .github
 .idea
 .vscode
 *.log
+
+# Big static assets not used by the server/worker docker build.
+packages/twenty-docs/images
+packages/twenty-docs/l
+packages/twenty-website/public
+packages/twenty-website-new/public
