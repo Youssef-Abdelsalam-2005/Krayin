@@ -14,6 +14,13 @@ setup_and_migrate_db() {
     if [ "$has_schema" = "f" ]; then
         echo "Database appears to be empty, running migrations."
         yarn database:init:prod
+    else
+        # Existing DB: still run pending TypeORM migrations (the upgrade
+        # command below only handles per-version data migrations, not new
+        # tables/columns added by raw TypeORM migrations such as
+        # CreateNotificationTable).  Idempotent — TypeORM skips already-run.
+        echo "Existing schema detected, applying any pending TypeORM migrations."
+        yarn database:migrate:prod --force --include-slow
     fi
 
     yarn command:prod cache:flush
