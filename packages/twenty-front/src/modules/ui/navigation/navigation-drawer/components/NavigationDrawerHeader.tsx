@@ -5,6 +5,7 @@ import { LightIconButton } from 'twenty-ui/input';
 import { themeCssVariables } from 'twenty-ui/theme-constants';
 
 import { useOpenRecordsSearchPageInSidePanel } from '@/side-panel/hooks/useOpenRecordsSearchPageInSidePanel';
+import { NotificationBell } from '@/notifications/components/NotificationBell';
 import { PAGE_BAR_MIN_HEIGHT } from '@/ui/layout/page/constants/PageBarMinHeight';
 import { MultiWorkspaceDropdownButton } from '@/ui/navigation/navigation-drawer/components/MultiWorkspaceDropdown/MultiWorkspaceDropdownButton';
 import { isNavigationDrawerExpandedState } from '@/ui/navigation/states/isNavigationDrawerExpanded';
@@ -70,6 +71,7 @@ export const NavigationDrawerHeader = ({
       </StyledWorkspaceDropdownContainer>
       {!isMobile && (
         <StyledRightActions isExpanded={isNavigationDrawerExpanded}>
+          <NotificationBell />
           <LightIconButton
             Icon={IconSearch}
             accent="secondary"

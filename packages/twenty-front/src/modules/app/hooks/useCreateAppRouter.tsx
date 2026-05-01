@@ -100,6 +100,12 @@ const StandalonePageLayoutPage = lazy(() =>
   })),
 );
 
+const NotificationsPage = lazy(() =>
+  import('~/pages/notifications/NotificationsPage').then((module) => ({
+    default: module.NotificationsPage,
+  })),
+);
+
 const NotFound = lazy(() =>
   import('~/pages/not-found/NotFound').then((module) => ({
     default: module.NotFound,
@@ -231,6 +237,14 @@ export const useCreateAppRouter = (
             element={
               <LazyRoute>
                 <StandalonePageLayoutPage />
+              </LazyRoute>
+            }
+          />
+          <Route
+            path={AppPath.Notifications}
+            element={
+              <LazyRoute>
+                <NotificationsPage />
               </LazyRoute>
             }
           />
