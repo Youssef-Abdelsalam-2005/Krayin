@@ -1589,12 +1589,14 @@ msgid "Alert"
 msgstr "Upozornění"
 
 #. js-lingui-id: N40H+G
+#: src/pages/notifications/NotificationsPage.tsx
 #: src/modules/views/view-picker/components/ViewPickerDropdown.tsx
 #: src/modules/settings/roles/role-permissions/object-level-permissions/field-permissions/components/SettingsRolePermissionsObjectLevelObjectFieldPermissionTableAllHeaderRow.tsx
 #: src/modules/settings/roles/role-permissions/object-level-permissions/components/SettingsRolePermissionsObjectLevelUpdateFieldsValueForObject.tsx
 #: src/modules/settings/roles/role-permissions/object-level-permissions/components/SettingsRolePermissionsObjectLevelSeeFieldsValueForObject.tsx
 #: src/modules/settings/components/SettingsDatabaseEventsForm.tsx
 #: src/modules/object-record/record-board/record-board-column/utils/getAggregateOperationShortLabel.ts
+#: src/modules/notifications/components/NotificationDropdownPanel.tsx
 #: src/modules/ai/constants/AgentChatThreadLastActivityFilterLabels.ts
 #: src/modules/ai/constants/AgentChatThreadFilterStatusLabels.ts
 #: src/modules/activities/timeline-activities/components/TimelineCard.tsx
@@ -2191,6 +2193,7 @@ msgid "Archive files cannot be previewed. Please download the file to access its
 msgstr "Archivní soubory nelze zobrazit v náhledu. Pro přístup k obsahu si soubor stáhněte."
 
 #. js-lingui-id: TdfEV7
+#: src/pages/notifications/NotificationsPage.tsx
 #: src/modules/ai/constants/AgentChatThreadFilterStatusLabels.ts
 msgid "Archived"
 msgstr ""
@@ -9075,6 +9078,12 @@ msgstr "Načítání vlákna"
 msgid "Loading..."
 msgstr "Načítání..."
 
+#. js-lingui-id: Pwqkdw
+#: src/pages/notifications/NotificationsPage.tsx
+#: src/modules/notifications/components/NotificationDropdownPanel.tsx
+msgid "Loading…"
+msgstr ""
+
 #. js-lingui-id: 8NbHF7
 #: src/pages/settings/ai/SettingsAiPrompts.tsx
 msgid "Locale"
@@ -9248,6 +9257,12 @@ msgstr ""
 #: src/modules/side-panel/pages/page-layout/hooks/useGraphGroupBySortOptionLabels.ts
 msgid "Manual"
 msgstr "Ruční"
+
+#. js-lingui-id: onllUU
+#: src/pages/notifications/NotificationsPage.tsx
+#: src/modules/notifications/components/NotificationDropdownPanel.tsx
+msgid "Mark all as read"
+msgstr ""
 
 #. js-lingui-id: Zt5PUS
 #: src/pages/settings/applications/SettingsApplications.tsx
@@ -10417,6 +10432,12 @@ msgstr "Nejsou dostupné žádné modely. Prosím, nakonfigurujte AI modely v na
 msgid "No notes"
 msgstr "Žádné poznámky"
 
+#. js-lingui-id: o6dBTG
+#: src/pages/notifications/NotificationsPage.tsx
+#: src/modules/notifications/components/NotificationDropdownPanel.tsx
+msgid "No notifications yet."
+msgstr ""
+
 #. js-lingui-id: 14uqQk
 #: src/pages/settings/applications/components/SettingsApplicationDataTable.tsx
 msgid "No object found"
@@ -10700,9 +10721,21 @@ msgstr "Nesdíleno uživatelem {notSharedByFullName}"
 msgid "Not synced"
 msgstr "Nesynchronizováno"
 
+#. js-lingui-id: 7FN5mz
+#: src/pages/notifications/NotificationsPage.tsx
+msgid "Nothing in the archive."
+msgstr ""
+
 #. js-lingui-id: DYCPYF
 #: src/modules/page-layout/widgets/components/StandaloneWidgetPlaceholder.tsx
 msgid "Nothing to see"
+msgstr ""
+
+#. js-lingui-id: iDNBZe
+#: src/pages/notifications/NotificationsPage.tsx
+#: src/pages/notifications/NotificationsPage.tsx
+#: src/modules/notifications/components/NotificationBell.tsx
+msgid "Notifications"
 msgstr ""
 
 #. js-lingui-id: YwzE9K
@@ -15623,6 +15656,12 @@ msgstr ""
 msgid "Unordered list with bullets"
 msgstr ""
 
+#. js-lingui-id: KuVpz+
+#: src/pages/notifications/NotificationsPage.tsx
+#: src/modules/notifications/components/NotificationDropdownPanel.tsx
+msgid "Unread"
+msgstr ""
+
 #. js-lingui-id: wja8aL
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceDetail.tsx
 #: src/pages/settings/admin-panel/SettingsAdminWorkspaceChatThread.tsx
@@ -16170,6 +16209,11 @@ msgstr ""
 #. js-lingui-id: nK72s8
 #: src/pages/settings/ai/components/SettingsAgentLogsTab.tsx
 msgid "View all evaluations"
+msgstr ""
+
+#. js-lingui-id: /WA/tl
+#: src/modules/notifications/components/NotificationDropdownPanel.tsx
+msgid "View all notifications"
 msgstr ""
 
 #. js-lingui-id: XVf/G7
@@ -16936,6 +16980,12 @@ msgstr "Ztratíte všechna vaše mapování."
 #: src/modules/settings/domains/components/SettingsSubdomain.tsx
 msgid "You're about to change your workspace subdomain. This action will log out all users."
 msgstr "Chystáte se změnit subdoménu své pracovní oblasti. Tato akce odhlásí všechny uživatele."
+
+#. js-lingui-id: KS7iJH
+#: src/pages/notifications/NotificationsPage.tsx
+#: src/modules/notifications/components/NotificationDropdownPanel.tsx
+msgid "You're all caught up."
+msgstr ""
 
 #. js-lingui-id: Z5uTAF
 #: src/modules/ai/components/AIChatNoMoreBillingCreditsBanner.tsx
