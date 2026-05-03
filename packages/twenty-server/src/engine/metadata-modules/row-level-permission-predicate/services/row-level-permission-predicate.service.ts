@@ -555,15 +555,13 @@ export class RowLevelPermissionPredicateService {
   private async hasRowLevelPermissionFeature(
     workspaceId: string,
   ): Promise<boolean> {
-    const hasValidEnterprisePlan = this.enterprisePlanService.isValid();
-
-    const isRowLevelPermissionEnabled =
-      await this.billingService.hasEntitlement(
-        workspaceId,
-        BillingEntitlementKey.RLS,
-      );
-
-    return hasValidEnterprisePlan && isRowLevelPermissionEnabled;
+    // Self-host unlock: rely on the billing entitlement only.
+    // hasEntitlement() short-circuits to true when IS_BILLING_ENABLED=false,
+    // so this returns true on self-hosted instances without a signed enterprise license.
+    return this.billingService.hasEntitlement(
+      workspaceId,
+      BillingEntitlementKey.RLS,
+    );
   }
 
   private async hasRowLevelPermissionFeatureOrThrow(workspaceId: string) {

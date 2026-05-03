@@ -1,4 +1,3 @@
-import { currentWorkspaceState } from '@/auth/states/currentWorkspaceState';
 import { useObjectMetadataItemById } from '@/object-metadata/hooks/useObjectMetadataItemById';
 import { mapRLSOperandToRecordFilterOperand } from '@/object-record/record-filter/utils/mapRLSOperandToRecordFilterOperand';
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
@@ -10,7 +9,6 @@ import { SubMenuTopBarContainer } from '@/ui/layout/page/components/SubMenuTopBa
 import { useAtomFamilyStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomFamilyStateValue';
 import { t } from '@lingui/core/macro';
 import { useSearchParams } from 'react-router-dom';
-import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { SettingsPath } from 'twenty-shared/types';
 import {
   getSettingsPath,
@@ -19,11 +17,7 @@ import {
 } from 'twenty-shared/utils';
 import { Button } from 'twenty-ui/input';
 import { useQuery } from '@apollo/client/react';
-import {
-  type BillingEntitlement,
-  BillingEntitlementKey,
-  FindOneAgentDocument,
-} from '~/generated-metadata/graphql';
+import { FindOneAgentDocument } from '~/generated-metadata/graphql';
 
 type SettingsRolePermissionsObjectLevelObjectFormProps = {
   roleId: string;
@@ -36,8 +30,6 @@ export const SettingsRolePermissionsObjectLevelObjectForm = ({
 }: SettingsRolePermissionsObjectLevelObjectFormProps) => {
   const [searchParams] = useSearchParams();
   const fromAgentId = searchParams.get('fromAgent');
-
-  const currentWorkspace = useAtomStateValue(currentWorkspaceState);
 
   const settingsDraftRole = useAtomFamilyStateValue(
     settingsDraftRoleFamilyState,
@@ -53,14 +45,9 @@ export const SettingsRolePermissionsObjectLevelObjectForm = ({
     objectId: objectMetadataId,
   });
 
-  const workspaceBillingEntitlements = currentWorkspace?.billingEntitlements;
-
-  const isRLSBillingEntitlementEnabled =
-    workspaceBillingEntitlements?.some(
-      (entitlement: BillingEntitlement) =>
-        entitlement.key === BillingEntitlementKey.RLS &&
-        entitlement.value === true,
-    ) ?? false;
+  // Self-host unlock: enable record-level permissions UI unconditionally.
+  // Backend gate is loosened in row-level-permission-predicate.service.ts.
+  const isRLSBillingEntitlementEnabled = true;
 
   const objectMetadataItem = objectMetadata.objectMetadataItem;
 
