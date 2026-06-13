@@ -7,9 +7,13 @@ import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldCont
 // Instead of passing it in the context
 // See: https://github.com/twentyhq/twenty/issues/4403
 export const useIsFieldClearable = (): boolean => {
-  const { clearable, isLabelIdentifier } = useContext(FieldContext);
+  const { clearable, fieldDefinition, isLabelIdentifier } =
+    useContext(FieldContext);
 
-  const fieldCanBeCleared = !isLabelIdentifier && clearable !== false;
+  const fieldCanBeCleared =
+    !isLabelIdentifier &&
+    clearable !== false &&
+    fieldDefinition.metadata.isNullable !== false;
 
   return fieldCanBeCleared;
 };

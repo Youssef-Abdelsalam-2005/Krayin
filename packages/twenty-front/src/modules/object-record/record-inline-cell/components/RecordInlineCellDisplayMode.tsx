@@ -54,9 +54,12 @@ const StyledRecordInlineCellNormalModeInnerContainer = styled.div`
   white-space: nowrap;
 `;
 
-const StyledEmptyField = styled.div`
+const StyledEmptyField = styled.div<{ isRequired?: boolean }>`
   align-items: center;
-  color: ${themeCssVariables.font.color.light};
+  color: ${({ isRequired }) =>
+    isRequired
+      ? themeCssVariables.color.red
+      : themeCssVariables.font.color.light};
   display: flex;
   height: 20px;
 `;
@@ -74,9 +77,10 @@ export const RecordInlineCellDisplayMode = ({
   const { editModeContentOnly, label, buttonIcon, readonly } =
     useRecordInlineCellContext();
 
-  const { isForbidden } = useContext(FieldContext);
+  const { fieldDefinition, isForbidden } = useContext(FieldContext);
 
   const isFieldEmpty = useIsFieldEmpty();
+  const isRequired = fieldDefinition.metadata.isNullable === false;
   const showEditButton =
     buttonIcon &&
     isHovered &&
@@ -86,7 +90,7 @@ export const RecordInlineCellDisplayMode = ({
 
   const isFieldInputOnly = useIsFieldInputOnly();
 
-  const emptyPlaceHolder = label ?? t`Empty`;
+  const emptyPlaceHolder = isRequired ? t`Required` : (label ?? t`Empty`);
 
   const shouldShowValue = !isFieldEmpty || isFieldInputOnly || isForbidden;
 
@@ -103,7 +107,9 @@ export const RecordInlineCellDisplayMode = ({
           {shouldShowValue ? (
             children
           ) : shouldShowEmptyPlaceholder ? (
-            <StyledEmptyField>{emptyPlaceHolder}</StyledEmptyField>
+            <StyledEmptyField isRequired={isRequired}>
+              {emptyPlaceHolder}
+            </StyledEmptyField>
           ) : null}
         </StyledRecordInlineCellNormalModeInnerContainer>
       </StyledRecordInlineCellNormalModeOuterContainer>

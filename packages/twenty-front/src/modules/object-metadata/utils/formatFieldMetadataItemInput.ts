@@ -13,6 +13,7 @@ export const formatFieldMetadataItemInput = (
       | 'options'
       | 'settings'
       | 'isLabelSyncedWithName'
+      | 'isNullable'
       | 'isUnique'
     >
   >,
@@ -26,6 +27,7 @@ export const formatFieldMetadataItemInput = (
     options: input.options,
     settings: input.settings,
     isLabelSyncedWithName: input.isLabelSyncedWithName,
+    isNullable: input.isNullable,
     isUnique: input.isUnique,
   };
 };

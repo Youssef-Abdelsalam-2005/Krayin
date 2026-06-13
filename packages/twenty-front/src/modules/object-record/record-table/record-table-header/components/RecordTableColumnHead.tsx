@@ -3,6 +3,7 @@ import { useContext } from 'react';
 
 import { fieldMetadataItemByIdSelector } from '@/object-metadata/states/fieldMetadataItemByIdSelector';
 import { isFieldMetadataItemLabelIdentifierSelector } from '@/object-metadata/states/isFieldMetadataItemLabelIdentifierSelector';
+import { RequiredFieldMarker } from '@/object-record/record-field/ui/components/RequiredFieldMarker';
 import { type RecordField } from '@/object-record/record-field/types/RecordField';
 import { shouldCompactRecordTableFirstColumnComponentState } from '@/object-record/record-table/states/shouldCompactRecordTableFirstColumnComponentState';
 import { useAtomComponentStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue';
@@ -40,6 +41,7 @@ const StyledIcon = styled.div`
 `;
 
 const StyledText = styled.span`
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -63,6 +65,8 @@ export const RecordTableColumnHead = ({
   const Icon = getIcon(
     correspondingFieldMetadataItem.foundFieldMetadataItem?.icon,
   );
+  const isRequired =
+    correspondingFieldMetadataItem.foundFieldMetadataItem?.isNullable === false;
 
   const isLabelIdentifier = useAtomFamilySelectorValue(
     isFieldMetadataItemLabelIdentifierSelector,
@@ -84,6 +88,7 @@ export const RecordTableColumnHead = ({
       <StyledText>
         {correspondingFieldMetadataItem.foundFieldMetadataItem?.label}
       </StyledText>
+      {isRequired ? <RequiredFieldMarker /> : null}
     </StyledTitle>
   );
 };

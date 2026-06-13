@@ -80,9 +80,12 @@ export const FormFieldInput = ({
   onError,
   timeZone,
 }: FormFieldInputProps) => {
+  const fieldLabel =
+    field.metadata.isNullable === false ? `${field.label} *` : field.label;
+
   return isFieldNumber(field) || field.type === FieldMetadataType.NUMERIC ? (
     <FormNumberFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as string | number | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -93,7 +96,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldBoolean(field) ? (
     <FormBooleanFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as string | boolean | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -101,7 +104,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldText(field) ? (
     <FormTextFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as string | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -110,7 +113,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldSelect(field) ? (
     <FormSelectFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as string | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -119,7 +122,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldFullName(field) ? (
     <FormFullNameFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as FieldFullNameValue | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -127,7 +130,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldAddress(field) ? (
     <FormAddressFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as FieldAddressValue | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -135,7 +138,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldLinks(field) ? (
     <FormLinksFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as FieldLinksValue | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -143,7 +146,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldEmails(field) ? (
     <FormEmailsFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as FieldEmailsValue | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -151,7 +154,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldFiles(field) ? (
     <FormFilesFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as null | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -160,7 +163,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldPhones(field) ? (
     <FormPhoneFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as FieldPhonesValue | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -168,7 +171,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldDate(field) ? (
     <FormDateFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as string | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -177,7 +180,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldDateTime(field) ? (
     <FormDateTimeFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as string | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -186,7 +189,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldMultiSelect(field) ? (
     <FormMultiSelectFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as FieldMultiSelectValue | string | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -196,7 +199,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldRawJson(field) ? (
     <FormRawJsonFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as string | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -205,7 +208,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldUuid(field) ? (
     <FormUuidFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as string | null | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -214,7 +217,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldCurrency(field) ? (
     <FormCurrencyFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as FormFieldCurrencyValue | null}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -222,7 +225,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldRichText(field) ? (
     <FormRichTextFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as FieldRichTextValue | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}
@@ -231,7 +234,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldRelationManyToOne(field) ? (
     <FormRelationToOneFieldInput
-      label={field.label}
+      label={fieldLabel}
       objectNameSingular={field.metadata.relationObjectMetadataNameSingular}
       defaultValue={
         defaultValue as FieldRelationValue<FieldRelationToOneValue> | string
@@ -243,7 +246,7 @@ export const FormFieldInput = ({
     />
   ) : isFieldArray(field) ? (
     <FormArrayFieldInput
-      label={field.label}
+      label={fieldLabel}
       defaultValue={defaultValue as FieldArrayValue | string | undefined}
       onChange={onChange}
       VariablePicker={VariablePicker}

@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { ThemeContext, themeCssVariables } from 'twenty-ui/theme-constants';
 
 import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldContext';
+import { RequiredFieldMarker } from '@/object-record/record-field/ui/components/RequiredFieldMarker';
 import { useFieldFocus } from '@/object-record/record-field/ui/hooks/useFieldFocus';
 import { RecordInlineCellValue } from '@/object-record/record-inline-cell/components/RecordInlineCellValue';
 import { getRecordFieldInputInstanceId } from '@/object-record/utils/getRecordFieldInputId';
@@ -49,9 +50,16 @@ const StyledValueContainer = styled.div<{ readonly: boolean }>`
 `;
 
 const StyledLabelContainer = styled.div<{ width?: number }>`
+  align-items: center;
   color: ${themeCssVariables.font.color.tertiary};
+  display: flex;
   font-size: ${themeCssVariables.font.size.sm};
+  gap: ${themeCssVariables.spacing[1]};
   width: ${({ width }) => (width !== undefined ? `${width}px` : 'auto')};
+`;
+
+const StyledLabelTextContainer = styled.div`
+  min-width: 0;
 `;
 
 const StyledInlineCellBaseContainer = styled.div<{ readonly: boolean }>`
@@ -76,6 +84,8 @@ export const RecordInlineCellContainer = () => {
 
   const { recordId, fieldDefinition, onMouseEnter, onMouseLeave, anchorId } =
     useContext(FieldContext);
+
+  const isRequired = fieldDefinition.metadata.isNullable === false;
 
   if (isFieldText(fieldDefinition)) {
     assertFieldMetadata(FieldMetadataType.TEXT, isFieldText, fieldDefinition);
@@ -117,7 +127,10 @@ export const RecordInlineCellContainer = () => {
           )}
           {showLabel && (
             <StyledLabelContainer width={labelWidth}>
-              <OverflowingTextWithTooltip text={label} displayedMaxRows={1} />
+              <StyledLabelTextContainer>
+                <OverflowingTextWithTooltip text={label} displayedMaxRows={1} />
+              </StyledLabelTextContainer>
+              {isRequired ? <RequiredFieldMarker /> : null}
             </StyledLabelContainer>
           )}
           {/* TODO: Displaying Tooltips on the board is causing performance issues https://react-tooltip.com/docs/examples/render */}

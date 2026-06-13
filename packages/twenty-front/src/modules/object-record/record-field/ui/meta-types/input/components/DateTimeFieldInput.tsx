@@ -1,4 +1,5 @@
 import { FieldInputEventContext } from '@/object-record/record-field/ui/contexts/FieldInputEventContext';
+import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldContext';
 import { RecordFieldComponentInstanceContext } from '@/object-record/record-field/ui/states/contexts/RecordFieldComponentInstanceContext';
 import { DateTimeInput } from '@/ui/field/input/components/DateTimeInput';
 import { useAvailableComponentInstanceIdOrThrow } from '@/ui/utilities/state/component-state/hooks/useAvailableComponentInstanceIdOrThrow';
@@ -14,6 +15,8 @@ export const DateTimeFieldInput = () => {
   const { onEnter, onEscape, onClickOutside, onSubmit } = useContext(
     FieldInputEventContext,
   );
+  const { fieldDefinition } = useContext(FieldContext);
+  const isRequired = fieldDefinition.metadata.isNullable === false;
 
   const instanceId = useAvailableComponentInstanceIdOrThrow(
     RecordFieldComponentInstanceContext,
@@ -67,9 +70,9 @@ export const DateTimeFieldInput = () => {
       onEnter={handleEnter}
       onEscape={handleEscape}
       value={dateValue}
-      clearable
+      clearable={!isRequired}
       onChange={handleChange}
-      onClear={handleClear}
+      onClear={isRequired ? undefined : handleClear}
       onSubmit={handleSubmit}
     />
   );

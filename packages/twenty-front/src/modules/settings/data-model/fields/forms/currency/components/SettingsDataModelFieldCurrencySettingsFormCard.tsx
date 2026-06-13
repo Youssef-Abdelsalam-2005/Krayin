@@ -5,6 +5,7 @@ import {
   SettingsDataModelFieldCurrencyForm,
   type SettingsDataModelFieldCurrencyFormValues,
 } from '@/settings/data-model/fields/forms/currency/components/SettingsDataModelFieldCurrencyForm';
+import { SettingsDataModelFieldIsRequiredForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsRequiredForm';
 import { SettingsDataModelFieldPreviewWidget } from '@/settings/data-model/fields/preview/components/SettingsDataModelFieldPreviewWidget';
 import { FieldMetadataType } from 'twenty-shared/types';
 import { type SettingsDataModelFieldEditFormValues } from '~/pages/settings/data-model/SettingsObjectFieldEdit';
@@ -40,10 +41,18 @@ export const SettingsDataModelFieldCurrencySettingsFormCard = ({
         />
       }
       form={
-        <SettingsDataModelFieldCurrencyForm
-          disabled={disabled}
-          existingFieldMetadataId={existingFieldMetadataId}
-        />
+        <>
+          <SettingsDataModelFieldCurrencyForm
+            disabled={disabled}
+            existingFieldMetadataId={existingFieldMetadataId}
+          />
+          <SettingsDataModelFieldIsRequiredForm
+            fieldType={FieldMetadataType.CURRENCY}
+            existingFieldMetadataId={existingFieldMetadataId}
+            disabled={disabled}
+            separatorBefore
+          />
+        </>
       }
     />
   );

@@ -5,6 +5,7 @@ import {
   SettingsDataModelFieldBooleanForm,
   type SettingsDataModelFieldBooleanFormValues,
 } from '@/settings/data-model/fields/forms/boolean/components/SettingsDataModelFieldBooleanForm';
+import { SettingsDataModelFieldIsRequiredForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsRequiredForm';
 import { SettingsDataModelFieldPreviewWidget } from '@/settings/data-model/fields/preview/components/SettingsDataModelFieldPreviewWidget';
 import { FieldMetadataType } from 'twenty-shared/types';
 import { type SettingsDataModelFieldEditFormValues } from '~/pages/settings/data-model/SettingsObjectFieldEdit';
@@ -39,10 +40,18 @@ export const SettingsDataModelFieldBooleanSettingsFormCard = ({
         />
       }
       form={
-        <SettingsDataModelFieldBooleanForm
-          disabled={disabled}
-          existingFieldMetadataId={existingFieldMetadataId}
-        />
+        <>
+          <SettingsDataModelFieldBooleanForm
+            disabled={disabled}
+            existingFieldMetadataId={existingFieldMetadataId}
+          />
+          <SettingsDataModelFieldIsRequiredForm
+            fieldType={FieldMetadataType.BOOLEAN}
+            existingFieldMetadataId={existingFieldMetadataId}
+            disabled={disabled}
+            separatorBefore
+          />
+        </>
       }
     />
   );

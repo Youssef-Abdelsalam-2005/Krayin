@@ -7,6 +7,7 @@ import { settingsDataModelFieldAddressFormSchema } from '@/settings/data-model/f
 import { SettingsDataModelFieldAddressSettingsFormCard } from '@/settings/data-model/fields/forms/address/components/SettingsDataModelFieldAddressSettingsFormCard';
 import { settingsDataModelFieldBooleanFormSchema } from '@/settings/data-model/fields/forms/boolean/components/SettingsDataModelFieldBooleanForm';
 import { SettingsDataModelFieldBooleanSettingsFormCard } from '@/settings/data-model/fields/forms/boolean/components/SettingsDataModelFieldBooleanSettingsFormCard';
+import { SettingsDataModelFieldIsRequiredForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsRequiredForm';
 import { SettingsDataModelFieldIsUniqueForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsUniqueForm';
 import { SettingsDataModelFieldMaxValuesForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldMaxValuesForm';
 import { settingsDataModelFieldTextFormSchema } from '@/settings/data-model/fields/forms/components/text/SettingsDataModelFieldTextForm';
@@ -368,6 +369,12 @@ export const SettingsDataModelFieldSettingsFormCard = ({
               <Separator />
             </>
           )}
+          <SettingsDataModelFieldIsRequiredForm
+            fieldType={fieldType}
+            existingFieldMetadataId={existingFieldMetadataId}
+            disabled={disabled}
+            separatorAfter
+          />
           <SettingsDataModelFieldIsUniqueForm
             fieldType={fieldType}
             existingFieldMetadataId={existingFieldMetadataId}

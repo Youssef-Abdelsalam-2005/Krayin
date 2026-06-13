@@ -4,13 +4,16 @@ import { useStore } from 'jotai';
 import { objectMetadataItemsSelector } from '@/object-metadata/states/objectMetadataItemsSelector';
 import { recordStoreFamilySelector } from '@/object-record/record-store/states/selectors/recordStoreFamilySelector';
 import { generateEmptyFieldValue } from '@/object-record/utils/generateEmptyFieldValue';
+import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 
 import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldContext';
 import { getForeignKeyNameFromRelationFieldName } from '@/object-record/utils/getForeignKeyNameFromRelationFieldName';
+import { t } from '@lingui/core/macro';
 import { FieldMetadataType, RelationType } from 'twenty-shared/types';
 
 export const useClearField = () => {
   const store = useStore();
+  const { enqueueErrorSnackBar } = useSnackBar();
   const {
     recordId,
     fieldDefinition,
@@ -46,6 +49,14 @@ export const useClearField = () => {
         RelationType.ONE_TO_MANY;
 
     if (shouldSkipClearingBecauseInvolvesMultipleRecords) {
+      return;
+    }
+
+    if (foundFieldMetadataItem.isNullable === false) {
+      enqueueErrorSnackBar({
+        message: t`Required field cannot be empty.`,
+      });
+
       return;
     }
 
@@ -87,7 +98,7 @@ export const useClearField = () => {
         },
       },
     });
-  }, [recordId, fieldDefinition, store, updateRecord]);
+  }, [enqueueErrorSnackBar, recordId, fieldDefinition, store, updateRecord]);
 
   return clearField;
 };

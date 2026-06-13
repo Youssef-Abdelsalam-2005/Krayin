@@ -53,8 +53,11 @@ import { isFieldRichText } from '@/object-record/record-field/ui/types/guards/is
 import { isFieldRichTextValue } from '@/object-record/record-field/ui/types/guards/isFieldRichTextValue';
 import { isFieldText } from '@/object-record/record-field/ui/types/guards/isFieldText';
 import { isFieldTextValue } from '@/object-record/record-field/ui/types/guards/isFieldTextValue';
+import { isFieldValueEmpty } from '@/object-record/record-field/ui/utils/isFieldValueEmpty';
 import { useUpsertRecordsInStore } from '@/object-record/record-store/hooks/useUpsertRecordsInStore';
 import { getForeignKeyNameFromRelationFieldName } from '@/object-record/utils/getForeignKeyNameFromRelationFieldName';
+import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
+import { t } from '@lingui/core/macro';
 import { isDefined } from 'twenty-shared/utils';
 import { isDeeplyEqual } from '~/utils/isDeeplyEqual';
 
@@ -73,6 +76,7 @@ export const usePersistField = ({
 
   const store = useStore();
   const { upsertRecordsInStore } = useUpsertRecordsInStore();
+  const { enqueueErrorSnackBar } = useSnackBar();
 
   const persistField = useCallback(
     async ({
@@ -184,6 +188,20 @@ export const usePersistField = ({
       if (isValuePersistable) {
         const fieldName = fieldDefinition.metadata.fieldName;
 
+        if (
+          fieldDefinition.metadata.isNullable === false &&
+          isFieldValueEmpty({
+            fieldDefinition,
+            fieldValue: valueToPersist,
+          })
+        ) {
+          enqueueErrorSnackBar({
+            message: t`Required field cannot be empty.`,
+          });
+
+          return;
+        }
+
         const currentValue = store.get(
           recordStoreFamilySelector.selectorFamily({ recordId, fieldName }),
         ) as { id?: string } | null | undefined;
@@ -292,6 +310,7 @@ export const usePersistField = ({
     [
       objectMetadataItem?.nameSingular,
       objectMetadataItems,
+      enqueueErrorSnackBar,
       store,
       updateOneRecord,
       upsertRecordsInStore,

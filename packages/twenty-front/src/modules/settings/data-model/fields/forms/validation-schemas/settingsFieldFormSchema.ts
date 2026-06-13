@@ -11,6 +11,10 @@ type SettingsFieldFormSchemaOptions = {
   sourceObjectMetadataId?: string;
 };
 
+const settingsDataModelFieldRequiredFormSchema = z.object({
+  isNullable: z.boolean().default(true),
+});
+
 export const settingsFieldFormSchema = (
   options: SettingsFieldFormSchemaOptions = {},
 ) => {
@@ -22,6 +26,7 @@ export const settingsFieldFormSchema = (
       settingsDataModelFieldIconLabelFormSchema(existingOtherLabels).shape,
     )
     .extend(settingsDataModelFieldDescriptionFormSchema().shape)
+    .extend(settingsDataModelFieldRequiredFormSchema.shape)
     .extend(settingsDataModelFieldTypeFormSchema.shape)
     .and(settingsDataModelFieldSettingsFormSchema)
     .refine((data) => {

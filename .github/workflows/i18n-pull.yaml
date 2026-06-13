@@ -1,4 +1,4 @@
-# Pull down translations from Crowdin every two hours or when triggered manually.
+# Pull down translations from Crowdin when triggered manually.
 # When force_pull input is true, translations will be pulled regardless of compilation status.
 
 name: 'Pull translations from Crowdin'
@@ -8,8 +8,6 @@ permissions:
   pull-requests: write
 
 on:
-  schedule:
-    - cron: '0 */2 * * *' # Every two hours.
   workflow_dispatch:
     inputs:
       force_pull:

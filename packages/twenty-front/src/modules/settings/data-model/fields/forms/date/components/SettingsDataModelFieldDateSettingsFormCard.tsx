@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
-import { Separator } from '@/settings/components/Separator';
 import { SettingsDataModelPreviewFormCard } from '@/settings/data-model/components/SettingsDataModelPreviewFormCard';
+import { SettingsDataModelFieldIsRequiredForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsRequiredForm';
 import { SettingsDataModelFieldIsUniqueForm } from '@/settings/data-model/fields/forms/components/SettingsDataModelFieldIsUniqueForm';
 import {
   SettingsDataModelFieldDateForm,
@@ -52,7 +52,14 @@ export const SettingsDataModelFieldDateSettingsFormCard = ({
             disabled={disabled}
             existingFieldMetadataId={existingFieldMetadataId}
           />
-          <Separator />
+          <SettingsDataModelFieldIsRequiredForm
+            fieldType={fieldType}
+            existingFieldMetadataId={existingFieldMetadataId}
+            disabled={disabled}
+            separatorBefore
+            separatorAfter
+            fallbackSeparator
+          />
           <SettingsDataModelFieldIsUniqueForm
             fieldType={fieldType}
             existingFieldMetadataId={existingFieldMetadataId}

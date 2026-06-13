@@ -16,6 +16,7 @@ type BaseFieldMetadata = {
   fieldName: string;
   objectMetadataNameSingular?: string;
   isCustom?: boolean;
+  isNullable?: boolean;
   isUIReadOnly?: boolean;
 };
 
