@@ -1,6 +1,7 @@
 import { useDateField } from '@/object-record/record-field/ui/meta-types/hooks/useDateField';
 import { DateInput } from '@/ui/field/input/components/DateInput';
 
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldContext';
 import { FieldInputEventContext } from '@/object-record/record-field/ui/contexts/FieldInputEventContext';
 import { RecordFieldComponentInstanceContext } from '@/object-record/record-field/ui/states/contexts/RecordFieldComponentInstanceContext';
@@ -15,7 +16,7 @@ export const DateFieldInput = () => {
     FieldInputEventContext,
   );
   const { fieldDefinition } = useContext(FieldContext);
-  const isRequired = fieldDefinition.metadata.isNullable === false;
+  const isRequired = isFieldMetadataRequired(fieldDefinition.metadata);
 
   const instanceId = useAvailableComponentInstanceIdOrThrow(
     RecordFieldComponentInstanceContext,

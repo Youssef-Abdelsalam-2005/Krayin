@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldContext';
 
 // TODO: have a better clearable settings in metadata ?
@@ -13,7 +14,7 @@ export const useIsFieldClearable = (): boolean => {
   const fieldCanBeCleared =
     !isLabelIdentifier &&
     clearable !== false &&
-    fieldDefinition.metadata.isNullable !== false;
+    !isFieldMetadataRequired(fieldDefinition.metadata);
 
   return fieldCanBeCleared;
 };

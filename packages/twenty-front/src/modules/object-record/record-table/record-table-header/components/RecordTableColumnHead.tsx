@@ -2,6 +2,7 @@ import { styled } from '@linaria/react';
 import { useContext } from 'react';
 
 import { fieldMetadataItemByIdSelector } from '@/object-metadata/states/fieldMetadataItemByIdSelector';
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { isFieldMetadataItemLabelIdentifierSelector } from '@/object-metadata/states/isFieldMetadataItemLabelIdentifierSelector';
 import { RequiredFieldMarker } from '@/object-record/record-field/ui/components/RequiredFieldMarker';
 import { type RecordField } from '@/object-record/record-field/types/RecordField';
@@ -65,8 +66,9 @@ export const RecordTableColumnHead = ({
   const Icon = getIcon(
     correspondingFieldMetadataItem.foundFieldMetadataItem?.icon,
   );
-  const isRequired =
-    correspondingFieldMetadataItem.foundFieldMetadataItem?.isNullable === false;
+  const isRequired = isFieldMetadataRequired(
+    correspondingFieldMetadataItem.foundFieldMetadataItem,
+  );
 
   const isLabelIdentifier = useAtomFamilySelectorValue(
     isFieldMetadataItemLabelIdentifierSelector,

@@ -1,6 +1,7 @@
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { useFieldMetadataItemById } from '@/object-metadata/hooks/useFieldMetadataItemById';
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { Separator } from '@/settings/components/Separator';
 import { SettingsOptionCardContentSelect } from '@/settings/components/SettingsOptions/SettingsOptionCardContentSelect';
 import { canBeRequired } from '@/settings/data-model/fields/forms/utils/canBeRequired';
@@ -10,7 +11,9 @@ import { IconAlertCircle } from 'twenty-ui/display';
 import { Toggle } from 'twenty-ui/input';
 
 type SettingsDataModelFieldIsRequiredFormValues = {
-  isNullable: boolean;
+  settings?: {
+    isRequired?: boolean;
+  } | null;
 };
 
 type SettingsDataModelFieldIsRequiredFormProps = {
@@ -53,11 +56,11 @@ export const SettingsDataModelFieldIsRequiredForm = ({
     <>
       {separatorBefore ? <Separator /> : null}
       <Controller
-        name="isNullable"
-        defaultValue={fieldMetadataItem?.isNullable ?? true}
+        name="settings.isRequired"
+        defaultValue={isFieldMetadataRequired(fieldMetadataItem)}
         control={control}
         render={({ field: { onChange, value } }) => {
-          const isRequired = value === false;
+          const isRequired = value === true;
 
           return (
             <SettingsOptionCardContentSelect
@@ -68,7 +71,7 @@ export const SettingsDataModelFieldIsRequiredForm = ({
               <Toggle
                 toggleSize="small"
                 value={isRequired}
-                onChange={(required) => onChange(!required)}
+                onChange={onChange}
                 disabled={disabled}
               />
             </SettingsOptionCardContentSelect>

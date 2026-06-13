@@ -12,7 +12,12 @@ type SettingsFieldFormSchemaOptions = {
 };
 
 const settingsDataModelFieldRequiredFormSchema = z.object({
-  isNullable: z.boolean().default(true),
+  settings: z
+    .object({
+      isRequired: z.boolean().optional(),
+    })
+    .passthrough()
+    .nullish(),
 });
 
 export const settingsFieldFormSchema = (

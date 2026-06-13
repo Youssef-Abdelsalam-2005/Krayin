@@ -3,6 +3,7 @@ import { useOpenRecordInSidePanel } from '@/side-panel/hooks/useOpenRecordInSide
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
 import { formatFieldMetadataItemAsFieldDefinition } from '@/object-metadata/utils/formatFieldMetadataItemAsFieldDefinition';
 import { getLabelIdentifierFieldMetadataItem } from '@/object-metadata/utils/getLabelIdentifierFieldMetadataItem';
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { useBuildRecordInputFromRLSPredicates } from '@/object-record/hooks/useBuildRecordInputFromRLSPredicates';
 import { useCreateOneRecord } from '@/object-record/hooks/useCreateOneRecord';
 import { recordGroupDefinitionsComponentSelector } from '@/object-record/record-group/states/selectors/recordGroupDefinitionsComponentSelector';
@@ -91,7 +92,7 @@ export const useCreateNewIndexRecord = ({
 
       const missingRequiredField = objectMetadataItem.fields.find((field) => {
         if (
-          field.isNullable !== false ||
+          !isFieldMetadataRequired(field) ||
           isDefined(field.defaultValue) ||
           field.isUIReadOnly
         ) {

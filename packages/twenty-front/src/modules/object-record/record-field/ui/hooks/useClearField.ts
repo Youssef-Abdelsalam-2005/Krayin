@@ -2,6 +2,7 @@ import { useCallback, useContext } from 'react';
 import { useStore } from 'jotai';
 
 import { objectMetadataItemsSelector } from '@/object-metadata/states/objectMetadataItemsSelector';
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { recordStoreFamilySelector } from '@/object-record/record-store/states/selectors/recordStoreFamilySelector';
 import { generateEmptyFieldValue } from '@/object-record/utils/generateEmptyFieldValue';
 import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
@@ -52,7 +53,7 @@ export const useClearField = () => {
       return;
     }
 
-    if (foundFieldMetadataItem.isNullable === false) {
+    if (isFieldMetadataRequired(foundFieldMetadataItem)) {
       enqueueErrorSnackBar({
         message: t`Required field cannot be empty.`,
       });

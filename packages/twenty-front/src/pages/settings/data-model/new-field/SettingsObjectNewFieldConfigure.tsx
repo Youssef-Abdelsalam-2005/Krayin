@@ -72,7 +72,6 @@ export const SettingsObjectNewFieldConfigure = () => {
         DEFAULT_ICONS_BY_FIELD_TYPE[fieldType] ?? DEFAULT_ICON_FOR_NEW_FIELD,
       label: '',
       name: '',
-      isNullable: true,
     },
   });
 

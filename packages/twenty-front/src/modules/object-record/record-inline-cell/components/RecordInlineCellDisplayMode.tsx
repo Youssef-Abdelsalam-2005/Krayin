@@ -1,5 +1,6 @@
 import { styled } from '@linaria/react';
 
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldContext';
 import { useIsFieldEmpty } from '@/object-record/record-field/ui/hooks/useIsFieldEmpty';
 import { useIsFieldInputOnly } from '@/object-record/record-field/ui/hooks/useIsFieldInputOnly';
@@ -80,7 +81,7 @@ export const RecordInlineCellDisplayMode = ({
   const { fieldDefinition, isForbidden } = useContext(FieldContext);
 
   const isFieldEmpty = useIsFieldEmpty();
-  const isRequired = fieldDefinition.metadata.isNullable === false;
+  const isRequired = isFieldMetadataRequired(fieldDefinition.metadata);
   const showEditButton =
     buttonIcon &&
     isHovered &&

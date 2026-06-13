@@ -18,6 +18,7 @@ import { FormSelectFieldInput } from '@/object-record/record-field/ui/form-types
 import { FormTextFieldInput } from '@/object-record/record-field/ui/form-types/components/FormTextFieldInput';
 import { FormUuidFieldInput } from '@/object-record/record-field/ui/form-types/components/FormUuidFieldInput';
 import { type VariablePickerComponent } from '@/object-record/record-field/ui/form-types/types/VariablePickerComponent';
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { type FieldDefinition } from '@/object-record/record-field/ui/types/FieldDefinition';
 import {
   type FieldAddressValue,
@@ -81,7 +82,7 @@ export const FormFieldInput = ({
   timeZone,
 }: FormFieldInputProps) => {
   const fieldLabel =
-    field.metadata.isNullable === false ? `${field.label} *` : field.label;
+    isFieldMetadataRequired(field.metadata) ? `${field.label} *` : field.label;
 
   return isFieldNumber(field) || field.type === FieldMetadataType.NUMERIC ? (
     <FormNumberFieldInput

@@ -1,4 +1,5 @@
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { isFieldMorphRelation } from '@/object-record/record-field/ui/types/guards/isFieldMorphRelation';
 import { type ObjectRecord } from '@/object-record/types/ObjectRecord';
 import { isSystemSearchVectorField } from '@/object-record/utils/isSystemSearchVectorField';
@@ -52,7 +53,7 @@ export const sanitizeRecordInput = ({
           return undefined;
         }
 
-        if (fieldMetadataItem?.isNullable === false && fieldValue == null) {
+        if (isFieldMetadataRequired(fieldMetadataItem) && fieldValue == null) {
           return undefined;
         }
 

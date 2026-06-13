@@ -1,3 +1,4 @@
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { FieldInputEventContext } from '@/object-record/record-field/ui/contexts/FieldInputEventContext';
 import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldContext';
 import { RecordFieldComponentInstanceContext } from '@/object-record/record-field/ui/states/contexts/RecordFieldComponentInstanceContext';
@@ -16,7 +17,7 @@ export const DateTimeFieldInput = () => {
     FieldInputEventContext,
   );
   const { fieldDefinition } = useContext(FieldContext);
-  const isRequired = fieldDefinition.metadata.isNullable === false;
+  const isRequired = isFieldMetadataRequired(fieldDefinition.metadata);
 
   const instanceId = useAvailableComponentInstanceIdOrThrow(
     RecordFieldComponentInstanceContext,

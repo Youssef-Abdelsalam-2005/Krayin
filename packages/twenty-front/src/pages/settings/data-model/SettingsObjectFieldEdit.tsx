@@ -126,7 +126,6 @@ export const SettingsObjectFieldEdit = () => {
       label: fieldMetadataItem?.label ?? '',
       description: fieldMetadataItem?.description,
       isLabelSyncedWithName: fieldMetadataItem?.isLabelSyncedWithName ?? true,
-      isNullable: fieldMetadataItem?.isNullable ?? true,
       settings,
       defaultValue,
     },

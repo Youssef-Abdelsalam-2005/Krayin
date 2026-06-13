@@ -2,6 +2,7 @@ import { isNull, isUndefined } from '@sniptt/guards';
 
 import { type CurrentWorkspaceMember } from '@/auth/states/currentWorkspaceMemberState';
 import { type EnrichedObjectMetadataItem } from '@/object-metadata/types/EnrichedObjectMetadataItem';
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { getFieldMetadataFromGqlField } from '@/object-record/cache/utils/getFieldMetadataFromGqlField';
 import { getMorphRelationFromFieldMetadataAndGqlField } from '@/object-record/cache/utils/getMorphRelationFromFieldMetadataAndGqlField';
 import {
@@ -123,7 +124,10 @@ export const computeOptimisticRecordFromInput = ({
         continue;
       }
 
-      if (!fieldMetadataItem.isNullable && recordInputFieldValue == null) {
+      if (
+        isFieldMetadataRequired(fieldMetadataItem) &&
+        recordInputFieldValue == null
+      ) {
         continue;
       }
 

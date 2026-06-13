@@ -29,6 +29,7 @@ import { recordStoreFamilySelector } from '@/object-record/record-store/states/s
 
 import { useObjectMetadataItemById } from '@/object-metadata/hooks/useObjectMetadataItemById';
 import { useObjectMetadataItems } from '@/object-metadata/hooks/useObjectMetadataItems';
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { getRecordFromRecordNode } from '@/object-record/cache/utils/getRecordFromRecordNode';
 import { useUpdateOneRecord } from '@/object-record/hooks/useUpdateOneRecord';
 import { buildMorphRelationUpdateInput } from '@/object-record/record-field/ui/meta-types/input/utils/buildMorphRelationUpdateInput';
@@ -189,7 +190,7 @@ export const usePersistField = ({
         const fieldName = fieldDefinition.metadata.fieldName;
 
         if (
-          fieldDefinition.metadata.isNullable === false &&
+          isFieldMetadataRequired(fieldDefinition.metadata) &&
           isFieldValueEmpty({
             fieldDefinition,
             fieldValue: valueToPersist,

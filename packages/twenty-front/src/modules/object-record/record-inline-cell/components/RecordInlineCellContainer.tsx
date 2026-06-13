@@ -2,6 +2,7 @@ import { styled } from '@linaria/react';
 import { useContext } from 'react';
 import { ThemeContext, themeCssVariables } from 'twenty-ui/theme-constants';
 
+import { isFieldMetadataRequired } from '@/object-metadata/utils/isFieldMetadataRequired';
 import { FieldContext } from '@/object-record/record-field/ui/contexts/FieldContext';
 import { RequiredFieldMarker } from '@/object-record/record-field/ui/components/RequiredFieldMarker';
 import { useFieldFocus } from '@/object-record/record-field/ui/hooks/useFieldFocus';
@@ -85,7 +86,7 @@ export const RecordInlineCellContainer = () => {
   const { recordId, fieldDefinition, onMouseEnter, onMouseLeave, anchorId } =
     useContext(FieldContext);
 
-  const isRequired = fieldDefinition.metadata.isNullable === false;
+  const isRequired = isFieldMetadataRequired(fieldDefinition.metadata);
 
   if (isFieldText(fieldDefinition)) {
     assertFieldMetadata(FieldMetadataType.TEXT, isFieldText, fieldDefinition);
